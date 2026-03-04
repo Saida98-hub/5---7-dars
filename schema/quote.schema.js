@@ -1,5 +1,7 @@
 const { Schema, model } = require('mongoose')
 
+const quoteSchema = require('../schema/quote.schema')
+
 const quoteSchema = new Schema(
 	{
 		content: { type: String, required: true, trim: true },

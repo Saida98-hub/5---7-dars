@@ -76,6 +76,10 @@ const Book = new Schema(
       type: Schema.Types.ObjectId,
       ref: "author",
       required: true
+    },
+    audioURL:{
+      type: String,
+      required: false
     }
   },
   { 

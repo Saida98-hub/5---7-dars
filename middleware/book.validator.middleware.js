@@ -1,5 +1,5 @@
 const CustomErrorhandler = require("../error/custom-error.handler")
-const authorValidator = require("../validator/author.validate")
+const authorValidator = require("../validator/author.validator")
 const bookValidator = require("../validator/book.validator")
 
 module.exports = function(req,res,next){

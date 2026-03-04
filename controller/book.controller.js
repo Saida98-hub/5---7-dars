@@ -1,6 +1,8 @@
 const CustomErrorhandler = require("../error/custom-error.handler")
 const BookSchema = require("../schema/book.schema")
 const Book = require("../schema/book.schema")
+const path = require("path")
+const fs = require("fs")
 
 const getAllBook = async (req,res)=>{
 try{
@@ -107,6 +109,38 @@ try{
   })
 }
 }
+const uploadFileBook = async (req,res)=>{
+try{
+ const {bookId} = req.params
+
+ const foundedBook = await BookSchema.findById(bookId)
+ if(!foundedBook) {
+  return res.status(404).json({
+    message: "Book not found"
+  })
+ }
+
+ if(foundedBook.audioURL) {
+  const fileUrl = path.join(__dirname, "..", foundedBook.audioURL)
+
+  if(fs.existsSync(fileUrl)) {
+    fs.unlinkSync(fileUrl) // oldin audioUrl mavjud bolsa ochirsin
+  }
+ }
+
+ const changer = req.file.path.replace(/\\/, "/")
+ foundedBook.audioURL = changer
+ foundedBook.save()
+
+ res.status(201).json ({
+  message: changer
+ })
+}catch(error){
+  return res.status(500).json({
+    message: error.message
+  })
+}
+}
 
 
 module.exports={
@@ -115,5 +149,6 @@ module.exports={
   addBook,
   updateBook,
   deleteBook,
-  searchBook
+  searchBook,
+  uploadFileBook
 }
