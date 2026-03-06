@@ -1,7 +1,7 @@
 const multer = require("multer")
 const fs = require("fs");
 const { log } = require("console");
-const path = rquire("path")
+const path = require("path")
 
 const audioStorage=multer.diskStorage({
     destination: (req, file, cb) => {

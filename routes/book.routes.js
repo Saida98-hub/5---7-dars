@@ -2,7 +2,7 @@ const {Router}=require("express")
 const { getAllBook, getOneBook, addBook, updateBook, deleteBook, searchBook, uploadFileBook } = require("../controller/book.controller")
 const bookValidatorMiddleware = require("../middleware/book.validator.middleware")
 const stream = require("../controller/audio.controller")
-
+const upload=require('../middleware/upload')
 const bookRouter=Router()
 
 bookRouter.get("/get_all_books",getAllBook)
